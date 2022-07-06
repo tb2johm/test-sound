@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
+import alarm from './alarm.mp3';
 
 function App() {
+
+  const [playing, setPlaying] = useState(false);
+  const audio = useMemo(() => new Audio(alarm), []);
+
+  useEffect(() => {
+    playing ? audio.play() : audio.pause();
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => setPlaying(!playing)}>Play/Pause</button>
     </div>
   );
 }
